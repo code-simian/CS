@@ -1,14 +1,14 @@
-using CreditSuisse.AccountManagement;
+﻿using CreditSuisse.AccountManagement;
+using NUnit.Framework;
 using System;
-using Xunit;
 
 namespace CreditSuisse.UnitTests
 {
-    public class UnitTest1
+    public class VirtualCashCardTests
     {
         const string validPin = "1234";
 
-        [Fact]
+        [Test]
         public void CallingWithdraw_WithValidArguments_AdjustTheBalanceCorrectly()
         {
             // Arrange
@@ -18,8 +18,8 @@ namespace CreditSuisse.UnitTests
             var result = card.Withdraw(validPin, 50m);
 
             // Assert
-            Assert.Equal(Status.Successful, result.Status);
-            Assert.Equal(50m, result.NewBalance);
+            Assert.AreEqual(Status.Successful, result.Status);
+            Assert.AreEqual(50m, result.NewBalance);
             // NOTE: In a real project transaction ID creation would be injectable/mockable so that it can be asserted
         }
     }
