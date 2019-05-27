@@ -29,13 +29,14 @@ namespace CreditSuisse.AccountManagement
             {
                 return new OperationResult() { Status = Status.InvalidPin };
             }
-            if (_balance - withdrawalAmount < 0)
-            {
-                return new OperationResult() { Status = Status.InsufficientFunds };
-            }
 
             lock (mutex)
             {
+                if (_balance - withdrawalAmount < 0)
+                {
+                    return new OperationResult() { Status = Status.InsufficientFunds };
+                }
+
                 _balance -= withdrawalAmount;
             }
 
